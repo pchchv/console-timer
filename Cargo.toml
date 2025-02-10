@@ -10,5 +10,4 @@ license = "Apache-2.0"
 keywords = ["cli"]
 
 [dependencies]
-ncurses = "6.0.1"
 regex = "1.11.1"
