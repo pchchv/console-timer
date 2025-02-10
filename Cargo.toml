@@ -10,3 +10,4 @@ license = "Apache-2.0"
 keywords = ["cli"]
 
 [dependencies]
+regex = "1.11.1"
