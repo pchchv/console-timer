@@ -1,6 +1,7 @@
 use std::env;
 use regex::Regex;
 use std::str::FromStr;
+use ncurses::{clear, mvprintw, refresh};
 
 fn get_seconds(time_string: &str) -> Option<i32> {
     let num_re = Regex::new(r"^(\d+)$").unwrap();
@@ -18,6 +19,13 @@ fn get_seconds(time_string: &str) -> Option<i32> {
     }
 
     return None;
+}
+
+fn print_centered_message(rows: &i32, cols: &i32, msg: &str) {
+    clear();
+    let pos_x : i32 = cols/2 - ((msg.len()/2) as i32);
+    mvprintw(rows/2, posX, &msg);
+    refresh();
 }
 
 fn main() {
