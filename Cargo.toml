@@ -7,7 +7,7 @@ description = "Simple timer in your terminal."
 readme = "README.md"
 repository = "https://github.com/pchchv/console-timer"
 license = "Apache-2.0"
-keywords = ["cli"]
+keywords = ["cli", "timer", "terminal-based"]
 
 [dependencies]
 chrono = "0.4.39"
