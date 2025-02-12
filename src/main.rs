@@ -7,7 +7,7 @@ use std::time::Duration;
 use std::io::{stdout, Write};
 use crossterm::{terminal::{Clear, ClearType}, cursor::MoveTo, ExecutableCommand};
 
-fn run(args: &Vec<String>) {
+fn run(args: &[String]) {
     let (cols, rows) = crossterm::terminal::size().unwrap();
 
     if args.len() < 2 {
