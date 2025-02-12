@@ -1,8 +1,40 @@
 use std::env;
 use regex::Regex;
+use chrono::Local;
 use std::str::FromStr;
+use std::thread::sleep;
+use std::time::Duration;
 use std::io::{stdout, Write};
-use crossterm::{execute, terminal::{Clear, ClearType}, cursor::MoveTo};
+use crossterm::{terminal::{Clear, ClearType}, cursor::MoveTo, ExecutableCommand};
+
+fn run(args: &Vec<String>) {
+    let (cols, rows) = crossterm::terminal::size().unwrap();
+
+    if args.len() < 2 {
+        println!("Usage: console-timer [time in seconds]");
+        return;
+    }
+
+    let seconds_or_none = get_seconds(&args[1]);
+    if seconds_or_none.is_none() {
+        println!("Usage: console-timer [time in seconds]");
+        return;
+    }
+    
+    print_centered_message(rows, cols, "Starting!");
+
+    let seconds_count = seconds_or_none.unwrap();
+    let mut i = seconds_count;
+    
+    while i >= 0 {
+        print_centered_message(rows, cols, &format!("{}s", i));
+        sleep(Duration::from_secs(1));
+        i -= 1;
+    }
+    
+    let finish_time = Local::now().format("%Y-%m-%d %H:%M:%S").to_string();
+    print_centered_message(rows, cols, &format!("Finished after {}s at {}", seconds_count, finish_time));
+}
 
 fn get_seconds(time_string: &str) -> Option<i32> {
     let num_re = Regex::new(r"^(\d+)$").unwrap();
@@ -38,4 +70,6 @@ fn main() {
         println!("Usage: console-timer [time in seconds]");
         return;
     }
+    
+    run(&args);
 }
