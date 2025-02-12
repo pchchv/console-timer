@@ -1,6 +1,8 @@
 use std::env;
 use regex::Regex;
 use std::str::FromStr;
+use std::io::{stdout, Write};
+use crossterm::{execute, terminal::{Clear, ClearType}, cursor::MoveTo};
 
 fn get_seconds(time_string: &str) -> Option<i32> {
     let num_re = Regex::new(r"^(\d+)$").unwrap();
@@ -20,8 +22,14 @@ fn get_seconds(time_string: &str) -> Option<i32> {
     return None;
 }
 
-fn print_centered_message(rows: &i32, cols: &i32, msg: &str) {
-    ///
+fn print_centered_message(rows: u16, cols: u16, msg: &str) {
+    let mut stdout = stdout();
+    execute!(stdout, Clear(ClearType::All)).unwrap();
+    let pos_x = cols / 2 - (msg.len() as u16 / 2);
+    let pos_y = rows / 2;
+    execute!(stdout, MoveTo(pos_x, pos_y)).unwrap();
+    println!("{}", msg);
+    stdout.flush().unwrap();
 }
 
 fn main() {
