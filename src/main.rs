@@ -16,18 +16,18 @@ fn get_seconds(time_string: &str) -> Option<i32> {
     if mins_re.is_match(time_string) {
         let c = mins_re.captures(time_string).unwrap();
         let seconds = i32::from_str(&c[1]).unwrap();
-        return Some(seconds*60);
+        return Some(seconds * 60);
     }
 
-    return None;
+    None
 }
 
 fn print_centered_message(rows: u16, cols: u16, msg: &str) {
     let mut stdout = stdout();
-    execute!(stdout, Clear(ClearType::All)).unwrap();
+    stdout.execute(Clear(ClearType::All)).unwrap();
     let pos_x = cols / 2 - (msg.len() as u16 / 2);
     let pos_y = rows / 2;
-    execute!(stdout, MoveTo(pos_x, pos_y)).unwrap();
+    stdout.execute(MoveTo(pos_x, pos_y)).unwrap();
     println!("{}", msg);
     stdout.flush().unwrap();
 }
