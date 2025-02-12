@@ -10,5 +10,7 @@ license = "Apache-2.0"
 keywords = ["cli"]
 
 [dependencies]
+chrono = "0.4.39"
 crossterm = "0.28.1"
+eventual = "0.1.7"
 regex = "1.11.1"
