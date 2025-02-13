@@ -15,5 +15,5 @@ console-timer 180
 
 #### Time in minutes:
 ```sh
-consoletimer 3m
+console-timer 3m
 ```
